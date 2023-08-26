@@ -13,4 +13,8 @@ const GameSchema = new Schema({
   img_url: { type: String },
 });
 
+GameSchema.virtual('url').get(() => {
+  return `/game/${this._id}`;
+});
+
 module.exports = mongoose.model('Game', GameSchema);
