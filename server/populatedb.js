@@ -63,6 +63,7 @@ async function gameCreate(
   platform,
   release_date,
   genre,
+  price,
   stock
 ) {
   const gamedetail = {
@@ -70,6 +71,7 @@ async function gameCreate(
     summary: summary,
     publisher: publisher,
     platform: platform,
+    price: price,
     release_date: release_date,
     stock: stock,
   };
@@ -138,6 +140,7 @@ async function createGames() {
       platforms[0],
       '2022-11-09',
       [genres[0], genres[1]],
+      69.99,
       1
     ),
     gameCreate(
@@ -148,16 +151,18 @@ async function createGames() {
       [platforms[0], platforms[1], platforms[7], platforms[8]],
       '2016-05-24',
       genres[2],
+      0,
       1
     ),
     gameCreate(
       2,
-      'Marvel vs. Capcom 2: New Age of Heroes',
-      'players select a team of characters from the Marvel and Capcom universes to engage in combat and attempt to knock out their opponents.',
+      'Devil May Cry 5',
+      "Following the events of Devil May Cry 4, Nero is working as a demon hunter for Dante's Devil May Cry agency along with his friend, gunsmith Nico Goldstein. One afternoon, Nero is working at the agency when a hooded man enters. Nero offers the stranger food when he suddenly rips off his demonic Devil Bringer arm, along with the Yamato sword.",
       publishers[5],
       [platforms[3], platforms[4]],
-      '2002-09-19',
+      '2019-03-08',
       genres[1],
+      29.99,
       1
     ),
   ]);

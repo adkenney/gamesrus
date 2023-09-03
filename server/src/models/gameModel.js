@@ -9,6 +9,7 @@ const GameSchema = new Schema({
   platform: [{ type: Schema.Types.ObjectId, ref: 'Platform', required: true }],
   genre: [{ type: Schema.Types.ObjectId, ref: 'Genre', required: true }],
   release_date: { type: Date },
+  price: { type: Number, required: true },
   stock: { type: Number, min: 0 },
   img_url: { type: String },
 });
