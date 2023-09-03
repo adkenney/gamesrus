@@ -3,8 +3,19 @@ const asyncHandler = require('express-async-handler');
 const Game = require('../models/gameModel');
 
 const getGames = asyncHandler(async (req, res) => {
-  const games = await Game.find();
+  const games = await Game.find({}).populate('publisher platform genre').exec();
   res.status(200).json(games);
+});
+
+const getGameById = asyncHandler(async (req, res) => {
+  const game = await Game.findById(req.params.id)
+    .populate('publisher platform genre')
+    .exec();
+  if (!game) {
+    res.status(400);
+    throw new Error('Game not found');
+  }
+  res.status(200).json(game);
 });
 
 const setGame = asyncHandler(async (req, res) => {
@@ -48,6 +59,7 @@ const deleteGame = asyncHandler(async (req, res) => {
 
 module.exports = {
   getGames,
+  getGameById,
   setGame,
   updateGame,
   deleteGame,
