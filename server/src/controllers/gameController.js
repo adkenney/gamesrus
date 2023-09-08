@@ -22,9 +22,11 @@ const setGame = asyncHandler(async (req, res) => {
   const game = await Game.create({
     title: req.body.title,
     summary: req.body.summary,
+    release_date: req.body.release_date,
     publisher: req.body.publisher,
     platform: req.body.platform,
     genre: req.body.genre,
+    price: req.body.price,
     stock: req.body.stock,
   });
 
