@@ -1,22 +1,23 @@
+import PropTypes from 'prop-types';
 import { useQueryClient, useMutation } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { useGetPublishers } from '../api/useGetPublishers';
 import { useGetPlatforms } from '../api/useGetPlatforms';
 import { useGetGenres } from '../api/useGetGenres';
 
-export default function UpdateGameForm(game) {
+export default function UpdateGameForm({ game }) {
   const publishers = useGetPublishers();
   const platforms = useGetPlatforms();
   const genres = useGetGenres();
   const { register, handleSubmit, errors } = useForm({
     defaultValues: {
-      title: game.game.title,
-      summary: game.game.summary,
-      release_date: game.game.release_date.slice(0, 10),
-      publisher: game.game.publisher._id,
-      platform: game.game.platform._id,
-      genre: game.game.genre[0]._id,
-      price: game.game.price,
+      title: game.title,
+      summary: game.summary,
+      release_date: game.release_date.slice(0, 10),
+      publisher: game.publisher._id,
+      platform: game.platform._id,
+      genre: game.genre[0]._id,
+      price: game.price,
     },
   });
   const queryClient = useQueryClient();
@@ -104,3 +105,7 @@ export default function UpdateGameForm(game) {
     </>
   );
 }
+
+UpdateGameForm.propTypes = {
+  game: PropTypes.object.isRequired,
+};
