@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
 
 a {
   font-weight: 500;
@@ -54,6 +58,23 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* .modal-overlay {
+  position: absolute;
+  inset: 1em;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 350px;
+} */
 
 @media (prefers-color-scheme: light) {
   :root {

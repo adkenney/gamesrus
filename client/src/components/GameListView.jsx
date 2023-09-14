@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { useGetGames } from '../api/useGetGames';
 import UpdateGameForm from './UpdateGameForm';
@@ -7,7 +8,6 @@ export default function GameListView() {
   const games = useGetGames();
   const [selectedGame, setSelectedGame] = useState(null);
   const queryClient = useQueryClient();
-
   const deleteGame = useMutation({
     mutationFn: async id => {
       let deleteCode = prompt('Enter code to delete');
@@ -34,7 +34,9 @@ export default function GameListView() {
         games.map(game => {
           return (
             <div key={game._id}>
-              <h2>{game.title}</h2>
+              <h2>
+                <Link to={`/games/${game._id}`}>{game.title}</Link>
+              </h2>
               <p>{game.summary}</p>
               <p>Release date: {game.release_date}</p>
               <ul>
