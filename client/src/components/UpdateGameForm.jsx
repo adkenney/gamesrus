@@ -15,25 +15,23 @@ export default function UpdateGameForm({ game }) {
       summary: game.summary,
       release_date: game.release_date.slice(0, 10),
       publisher: game.publisher._id,
-      platform: game.platform._id,
-      genre: game.genre[0]._id,
+      platform: game.platform.map(platform => platform._id),
+      genre: game.genre.map(genre => genre._id),
       price: game.price,
     },
   });
+
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
     mutationFn: async formData => {
-      await fetch(
-        `${import.meta.env.VITE_BASE_URL}/api/games/${game.game._id}`,
-        {
-          method: 'PUT',
-          body: JSON.stringify(formData),
-          headers: { 'Content-type': 'application/json' },
-        }
-      );
+      await fetch(`${import.meta.env.VITE_BASE_URL}/api/games/${game._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(formData),
+        headers: { 'Content-type': 'application/json' },
+      });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKeys: ['game'] });
+      queryClient.invalidateQueries({ queryKeys: ['game', game._id] });
       alert('Game updated successfully');
     },
     onError: err => {
@@ -69,28 +67,43 @@ export default function UpdateGameForm({ game }) {
               );
             })}
         </select>
-        <label htmlFor="platform-select">Platform</label>
-        <select {...register('platform')} name="platform" id="platform-select">
+        <fieldset>
+          <legend>Platform</legend>
           {platforms &&
             platforms.map(platform => {
               return (
-                <option key={platform._id} value={platform._id.toString()}>
-                  {platform.name}
-                </option>
+                <div key={platform._id}>
+                  <input
+                    type="checkbox"
+                    {...register('platform')}
+                    name="platform"
+                    id={platform.name}
+                    value={platform._id.toString()}
+                  />
+                  <label htmlFor={platform.name}>{platform.name}</label>
+                </div>
               );
             })}
-        </select>
-        <label htmlFor="genre-select">Genre</label>
-        <select {...register('genre')} name="genre" id="genre-select">
+        </fieldset>
+        <fieldset>
+          <legend>Genre</legend>
           {genres &&
             genres.map(genre => {
               return (
-                <option key={genre._id} value={genre._id}>
-                  {genre.name}
-                </option>
+                <div key={genre._id}>
+                  <input
+                    type="checkbox"
+                    {...register('genre')}
+                    name="genre"
+                    id={genre.name}
+                    key={genre._id}
+                    value={genre._id}
+                  />
+                  <label htmlFor={genre.name}>{genre.name}</label>
+                </div>
               );
             })}
-        </select>
+        </fieldset>
         <label htmlFor="price-input">Price</label>
         <input
           {...register('price')}
@@ -100,7 +113,7 @@ export default function UpdateGameForm({ game }) {
           step="0.01"
         />
         {errors && <span>{errors.message}</span>}
-        <input type="submit" />
+        <input type="submit" value="Update" />
       </form>
     </>
   );

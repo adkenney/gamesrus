@@ -17,7 +17,7 @@ export default function AddGameForm() {
 
   const { mutate } = useMutation({
     mutationFn: async formData => {
-      await fetch(`${import.meta.VITE_BASE_URL}/api/games`, {
+      await fetch(`${import.meta.env.VITE_BASE_URL}/api/games`, {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: { 'Content-Type': 'application/json' },
@@ -71,34 +71,38 @@ export default function AddGameForm() {
                   })}
               </select>
               <label htmlFor="platform-select">Platform</label>
-              <select
-                {...register('platform')}
-                name="platform"
-                id="platform-select"
-              >
-                {platforms &&
-                  platforms.map(platform => {
-                    return (
-                      <option
-                        key={platform._id}
+              {platforms &&
+                platforms.map(platform => {
+                  return (
+                    <div key={platform._id}>
+                      <input
+                        type="checkbox"
+                        {...register('platform')}
+                        name="platform"
+                        id={platform.name}
                         value={platform._id.toString()}
-                      >
-                        {platform.name}
-                      </option>
-                    );
-                  })}
-              </select>
+                      />
+                      <label htmlFor={platform.name}>{platform.name}</label>
+                    </div>
+                  );
+                })}
               <label htmlFor="genre-select">Genre</label>
-              <select {...register('genre')} name="genre" id="genre-select">
-                {genres &&
-                  genres.map(genre => {
-                    return (
-                      <option key={genre._id} value={genre._id}>
-                        {genre.name}
-                      </option>
-                    );
-                  })}
-              </select>
+              {genres &&
+                genres.map(genre => {
+                  return (
+                    <div key={genre._id}>
+                      <input
+                        type="checkbox"
+                        {...register('genre')}
+                        name="genre"
+                        id={genre.name}
+                        key={genre._id}
+                        value={genre._id}
+                      />
+                      <label htmlFor={genre.name}>{genre.name}</label>
+                    </div>
+                  );
+                })}
               <label htmlFor="price-input">Price</label>
               <input
                 {...register('price')}
