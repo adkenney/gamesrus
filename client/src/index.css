@@ -33,6 +33,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: gray;
+  color: white;
 }
 
 h1 {
@@ -76,6 +78,30 @@ form {
   max-width: 350px;
 } */
 
+.game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+.card {
+  min-width: 350px;
+  background-color: black;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card-list {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
