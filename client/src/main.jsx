@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import ErrorPage from './error-page.jsx';
-import Game from './routes/Game.jsx';
+import GameDetail from './routes/GameDetail.jsx';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/games/:gameId',
-    element: <Game />,
+    element: <GameDetail />,
   },
 ]);
 
