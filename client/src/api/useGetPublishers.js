@@ -1,7 +1,9 @@
 import { useQuery } from 'react-query';
 
 const getPublisherData = async () => {
-  const response = await fetch('http://localhost:8000/api/publishers');
+  const response = await fetch(
+    `${import.meta.env.VITE_BASE_URL}/api/publishers`
+  );
   return response.json();
 };
 

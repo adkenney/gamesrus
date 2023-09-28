@@ -1,7 +1,9 @@
 import { useQuery } from 'react-query';
 
 const getPlatformsData = async () => {
-  const response = await fetch('http://localhost:8000/api/platforms');
+  const response = await fetch(
+    `${import.meta.env.VITE_BASE_URL}/api/platforms`
+  );
   return response.json();
 };
 

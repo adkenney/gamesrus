@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 const getGameData = async () => {
-  const response = await fetch('http://localhost:8000/api/games');
+  const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/games`);
   return response.json();
 };
 
